@@ -1,26 +1,10 @@
 import { useState } from "react";
-
-export default function TrafficLight() {
-  const [walk, setWalk] = useState(true);
-
-  function handleClick() {
-    setWalk(!walk);
-    alertMessage();
-  }
-
-  function alertMessage() {
-    alert(walk ? "Stop is next" : "Walk is next");
-  }
-
-  return (
-    <>
-      <button onClick={handleClick}>Change to {walk ? "Stop" : "Walk"}</button>
-      <h1
-        style={{
-          color: walk ? "darkgreen" : "darkred",
-        }}>
-        {walk ? "Walk" : "Stop"}
-      </h1>
-    </>
-  );
+/**
+ * This Clock component receives two props: color and time.
+ * When you select a different color in the select box,
+ * the Clock component receives a different color prop from its parent component.
+ * However, for some reason, the displayed color doesn’t update. Why? Fix the problem.
+ */
+export default function Clock(props) {
+  return <h1 style={{ color: props.color }}>{props.time}</h1>;
 }
