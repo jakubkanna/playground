@@ -1,37 +1,26 @@
 import { useState } from "react";
-export default function Form() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
 
-  function handleFirstNameChange(e) {
-    setFirstName(e.target.value);
+export default function TrafficLight() {
+  const [walk, setWalk] = useState(true);
+
+  function handleClick() {
+    setWalk(!walk);
+    alertMessage();
   }
 
-  function handleLastNameChange(e) {
-    setLastName(e.target.value);
-  }
-
-  function handleReset() {
-    setFirstName("");
-    setLastName("");
+  function alertMessage() {
+    alert(walk ? "Stop is next" : "Walk is next");
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <input
-        placeholder="First name"
-        value={firstName}
-        onChange={handleFirstNameChange}
-      />
-      <input
-        placeholder="Last name"
-        value={lastName}
-        onChange={handleLastNameChange}
-      />
-      <h1>
-        Hi, {firstName} {lastName}
+    <>
+      <button onClick={handleClick}>Change to {walk ? "Stop" : "Walk"}</button>
+      <h1
+        style={{
+          color: walk ? "darkgreen" : "darkred",
+        }}>
+        {walk ? "Walk" : "Stop"}
       </h1>
-      <button onClick={handleReset}>Reset</button>
-    </form>
+    </>
   );
 }
