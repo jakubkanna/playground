@@ -1,59 +1,54 @@
 import { useState } from "react";
-import AddItem from "./AddItem.js";
-import PackingList from "./PackingList.js";
 
-let nextId = 3;
-const initialItems = [
-  { id: 0, title: "Warm socks", packed: true },
-  { id: 1, title: "Travel journal", packed: false },
-  { id: 2, title: "Watercolors", packed: false },
-];
+export default function Person() {
+  const [firstName, setFirstName] = useState("John");
+  const [lastName, setLastName] = useState("Travolta");
+  const [age, setAge] = useState(18);
 
-export default function TravelPlan() {
-  const [items, setItems] = useState(initialItems);
+  const fullName = firstName + " " + lastName;
 
-  const total = items.length;
-  const packed = items.filter((item) => item.packed).length;
+  const handleIncreaseAge = () => {
+    console.log("in handleIncreaseAge (before setAge call): ", age);
+    setAge(age + 1);
+  };
 
-  function handleAddItem(title) {
-    setItems([
-      ...items,
-      {
-        id: nextId++,
-        title: title,
-        packed: false,
-      },
-    ]);
-  }
+  const handleFirstNameChange = (event) => {
+    const newFirstName = event.target.value;
+    setFirstName(newFirstName);
+  };
 
-  function handleChangeItem(nextItem) {
-    setItems(
-      items.map((item) => {
-        if (item.id === nextItem.id) {
-          return nextItem;
-        } else {
-          return item;
-        }
-      })
-    );
-  }
-
-  function handleDeleteItem(itemId) {
-    setItems(items.filter((item) => item.id !== itemId));
-  }
+  const handleLastNameChange = (event) => {
+    const newLastName = event.target.value;
+    setLastName(newLastName);
+  };
 
   return (
     <>
-      <AddItem onAddItem={handleAddItem} />
-      <PackingList
-        items={items}
-        onChangeItem={handleChangeItem}
-        onDeleteItem={handleDeleteItem}
+      <CustomInput
+        placeholder="First-name"
+        value={firstName}
+        onChange={handleFirstNameChange}
       />
-      <hr />
-      <b>
-        {packed} out of {total} packed!
-      </b>
+      <CustomInput
+        placeholder="Last-name"
+        value={lastName}
+        onChange={handleLastNameChange}
+      />
+
+      <h1>{fullName}</h1>
+      <h2>{age}</h2>
+      <button onClick={handleIncreaseAge}>Increase age</button>
     </>
+  );
+}
+
+function CustomInput({ placeholder, value, onChange }) {
+  return (
+    <input
+      type="text"
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+    />
   );
 }
