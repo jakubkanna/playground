@@ -1,10 +1,7 @@
-const fs = require("node:fs/promises");
-async function example() {
-  try {
-    const content = "Some content!";
-    await fs.appendFile("./test.txt", content);
-  } catch (err) {
-    console.log(err);
-  }
-}
-example();
+const myURL = new URL("https://abc:xyz@example.com");
+console.log(myURL.username);
+// Prints abc
+
+myURL.username = "123";
+console.log(myURL.href);
+// Prints https://123:xyz@example.com/
