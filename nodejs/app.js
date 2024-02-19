@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const http = require("node:http");
 const hostname = "127.0.0.1";
 const port = 3000;
@@ -5,6 +7,7 @@ const port = 3000;
 const array = [
   process.env.USER_ID, // "239482"
   process.env.USER_KEY, // "foobar"
+  process.env.PORT, //3000
 ];
 
 const server = http.createServer((req, res) => {
