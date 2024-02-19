@@ -1,9 +1,10 @@
-const fs = require("node:fs");
-const content = "Some content!";
-fs.writeFile("./test.txt", content, (err) => {
-  if (err) {
-    console.error(err);
-  } else {
-    // file written successfully
+const fs = require("node:fs/promises");
+async function example() {
+  try {
+    const content = "Some async content!";
+    await fs.writeFile("./test.txt", content);
+  } catch (err) {
+    console.log(err);
   }
-});
+}
+example();
